@@ -1,0 +1,131 @@
+{% extends "books/base.html" %}
+{% block content %} 
+
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <link rel="stylesheet" href="/resources/demos/style.css">
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script>
+  $( function() {
+    var dateFormat = "mm/dd/yy",
+      from = $( "#from" )
+        .datepicker({
+          minDate: 0,
+          defaultDate: "+1w",
+          changeMonth: true,
+          numberOfMonths: 1
+        })
+        .on( "change", function() {
+          to.datepicker( "option", "minDate", getDate( this ) );
+        }),
+      to = $( "#to" ).datepicker({
+        defaultDate: "+1w",
+        changeMonth: true,
+        numberOfMonths: 1
+      })
+      .on( "change", function() {
+        from.datepicker( "option", "maxDate", getDate( this ) );
+      });
+ 
+    function getDate( element ) {
+      var date;
+      try {
+        date = $.datepicker.parseDate( dateFormat, element.value );
+      } catch( error ) {
+        date = null;
+      }
+ 
+      return date;
+    }
+  } );
+  $("#check").on('click',function(){ 
+checkAvailability();
+})
+
+   function checkAvailability() {
+       var issue_date = document.getElementById("from").value;
+       var return_date = document.getElementById("to").value;
+       console.log("issue_date",issue_date)
+       console.log("in func")
+       $.ajax({
+       url: 'http://localhost:8000/bookrent/check/{{book.id}}?field1='+issue_date+'&field2='+return_date , 
+       type: 'GET',
+       contentType: 'application/json; charset=utf-8',
+       success: function (response) {
+           alert(response);
+       },
+       error: function () {
+           alert("error");
+       }
+   });
+   }
+
+  $("#cart").on('click',function(){ 
+add_to_cart();
+})
+
+   function add_to_cart() {
+       var issue_date = document.getElementById("from").value;
+       var return_date = document.getElementById("to").value;
+       console.log("issue_date",issue_date)
+       console.log("in func")
+       $.ajax({
+       url: 'http://localhost:8000/cart/rent/{{book.id}}/{?field1='+issue_date+'&field2='+return_date, 
+       type: 'GET',
+       contentType: 'application/json; charset=utf-8',
+       success: function (response) {
+           window.open("/cart/cartview/{{book.id}}");
+       },
+       error: function () {
+           alert("error");
+       }
+   });
+   }
+</script>
+
+  
+  <div>
+    <h1>Title: {{ book.title }}</h1>
+    <p><strong>Author:</strong> <a href="{% url 'author-detail' book.author.pk %}">{{ book.author }}</a></p>
+    <p><strong>Summary:</strong> {{ book.summary }}</p>
+    <p><strong>ISBN:</strong> {{ book.isbn }}</p>
+    <p><strong>Daily Rental Price(in rupees):</strong> {{ book.price}}</p>
+    <p><strong>Genre:</strong> {% for genre in book.genre.all %} {{ genre }}{% if not forloop.last %}, {% endif %}{% endfor %}</p>  
+  </div>
+
+<hr>
+
+  <div style="margin-left:20px;margin-top:20px">
+    {% if book.count > 0 %}
+      <p><strong>Book Status:</strong> Available</p>
+    {% else %}
+      <p><strong>Book Status:</strong> Not Available</p>
+    {% endif %}  
+    <p><strong>Imprint:</strong> {{book.imprint}}</p>
+  </div>
+
+<hr>
+
+  <div>
+    <h3>To Rent This Book, Please Enter Issue and Return date.</h3>
+  </div> 
+
+ <forms>
+
+      {% csrf_token %} 
+      
+      <label for="from">Issue Date</label>
+      <input type="text" id="from" name="issue_date"> <br><br>
+      <label for="to">Return Date</label>
+      <input type="text" id="to" name="return_date"><br><br>
+      
+      <div id="ajaxcall">
+        <button type="button" id="check" onclick="checkAvailability()">Check book Availability</button>&nbsp
+      </div>&nbsp
+      <div id="ajaxcall">
+        <button type="button" id="cart" onclick="add_to_cart()">Add To Cart</button>
+      </div>
+ </form>
+       
+{% endblock %}
+

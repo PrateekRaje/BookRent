@@ -1,0 +1,70 @@
+{% extends "books/base.html" %}
+
+{% block content %}
+  <div>
+  <h1>YOUR BOOKS</h1>
+  <hr><hr>	
+
+<style>
+table {
+    width:100%;
+}
+table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+th, td {
+    padding: 5px;
+    text-align: left;
+}
+table tr:nth-child(even) {
+    background-color: #eee;
+}
+table tr:nth-child(odd) {
+   background-color:#fff;
+}
+table th {
+    background-color: black;
+    color: white;
+}
+</style>
+<script>
+	function myFunction() {
+	    window.location='/cart/booking/';
+   }
+</script>
+
+<table style="width:100%">
+  <tr>
+    <th>Book Title</th> 
+    <th>Pick Up Date</th>
+    <th>Return Date</th>
+    <th>Price</th>
+  </tr>
+	{% for items in product %}
+	  <tr>
+	    <td>{{ items.book}}</td>
+	    <td>{{ items.issue_date }}</td>
+	    <td>{{ items.return_date}}</td>
+	    <td>{{ items.total_price}}</td>
+	  </tr>
+    {% endfor %}
+  
+</table>
+
+<h2> Total Price : {{total_amount}} </h2>
+<hr>
+<form action="http://localhost:8000/payments/pay/{{total_money}}" method="POST">
+     {% csrf_token %}
+    <script src="https://checkout.stripe.com/checkout.js" class="stripe-button btn-danger"
+         data-key="pk_test_lzl3tFIRBvv6FWTOKu56QULA"
+         data-amount="{{total_money}}"
+         data-name="Demo Site"
+         data-description="Consultadd"
+         data-currency="INR"
+         data-image="/media/img/128x128.png"
+         data-locale="auto">
+    </script>
+</form>
+
+{% endblock %} 
