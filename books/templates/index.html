@@ -2,20 +2,18 @@
 
 {% block content %}
 
+  {% load static %}
 
 
-<div style="color:black; font-size: 30; text-decoration:none; background-color:grey; text-transform:uppercase; margin-left:20px; margin-right:50px; margin-top:50px">
-
-{% load static %}
 <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}" />
 
  
-<html>
-<head>
-  <style>
+<style>
 .abc > a {color:black; font-size: 30; text-decoration:none; background-color:grey; text-transform:uppercase }
 </style>
-</head>
+
+
+
 <div class="abc">  
 
     <a href="/bookrent/books/"> BOOKS  </a> &nbsp&nbsp&nbsp&nbsp
@@ -26,14 +24,7 @@
     
 </div>
 <hr>
-</body>
-</html>
-
-
-
-
  <center><h1>BOOKS RENTAL GALLERY</h1></center>
- </div>
  
    <p>Welcome to <em>BookRental</em> </p>
    <p>The gallery has the following record counts:</p>
@@ -47,4 +38,5 @@
 
  <h3>BOOK RENTAL</h3>
  <h5>Book Rentl started in 2017 and was oneof the book rental service online. We have saved students more than $700 Million. Save up to 90% on your diffents books with Book Rental. Search from over 5 Million cheap books. Book Rental has never wavered from our mission to make education more affordable for all people out in the world. Every day, we focus on delivering people the best prices, the most flexible options, and the best service on earth.</h5>
+
 {% endblock %}

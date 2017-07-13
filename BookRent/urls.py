@@ -19,6 +19,7 @@ from django.conf.urls.static import static
 from django.contrib.auth import views as auth_views
 from django.views.generic.base import TemplateView
 from django.conf import settings
+from samplecel import views
 
 
 
@@ -30,7 +31,8 @@ urlpatterns = [
     url(r'^bookrent/', include('books.urls')),
     url(r'^cart/', include('cart.urls')),
     url(r'^payments/', include('payments.urls')),
+    url(r'celerysample$', views.test),
+
 ]    
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATICFILES_DIRS, show_indexes=True)
-#urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT, show_indexes=True)
 

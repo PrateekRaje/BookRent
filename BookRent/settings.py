@@ -45,6 +45,8 @@ INSTALLED_APPS = [
     'home',
     'cart',
     'payments',
+    'samplecel',
+    'djcelery',
 ]
 
 
@@ -153,3 +155,7 @@ APPEND_SLASH=False
 
 STRIPE_PUBLIC_KEY = os.environ.get("STRIPE_PUBLIC_KEY", "pk_test_lzl3tFIRBvv6FWTOKu56QULA")
 STRIPE_SECRET_KEY = os.environ.get("STRIPE_SECRET_KEY", "sk_test_d4iXJ56imIxwGMKEzQPKz2bY")
+
+BROKER_URL = 'redis://127.0.0.1:6379/0'
+BROKER_TRANSPORT = 'redis'
+CELERYBEAT_SCHEDULER = 'djcelery.schedulers.DatabaseScheduler'

@@ -13,9 +13,7 @@ from django.contrib.auth.models import User
 from .models import Book, Author, Genre, Order
 
 def index(request):
-    """
-    View function for home page of site."""
-    
+   
     num_books=Book.objects.all().count()
     num_instances=Book.objects.all().count()
     num_instances_available=Book.objects.filter(status__exact='a').count()
@@ -84,30 +82,13 @@ def book_detail(request, book_id):
     return render(request, 'bookrent/book_detail.html', {'book':book,'book_details':book_details})
 
 
-class RentListView(generic.ListView):
-    model = Order   
-    template_name = 'books/rent_list.html'
-
-def rent_list(request, book_id):
-    book = Book.objects.get(id= book_id)
-    return render(request, 'bookrent/rent_list.html', {'book':book})
-
-
-class RentDetailView(generic.DetailView):
-    model = Order
-    template_name = 'books/rent_detail'
-
-
-
 def checkAvailability(request, book_id):
     book = Book.objects.get(pk=book_id)
-    #order = Order.objects.get(pk=order_id)
-
+    
     issue_date = request.GET['field1']
     return_date = request.GET['field2']
 
     order = Order.objects.filter(book=book_id)
-    #print order.filter(count > 2)
     issue_date = datetime.strptime(issue_date, "%m/%d/%Y").strftime("%Y-%m-%d")
     return_date = datetime.strptime(return_date, "%m/%d/%Y").strftime("%Y-%m-%d")
 

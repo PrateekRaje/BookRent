@@ -38,19 +38,15 @@ class Book(models.Model):
     status = models.CharField(max_length=1, choices=LOAN_STATUS, blank=True, default='d', help_text='Book availability')
 
     def __str__(self):
-        return self.title
         return self.summary
         return self.price
         return self.count    
+        return '%s, (%s)' % (self.id, self.title)
     
     def get_absolute_url(self):
         return reverse('book-detail', args=[str(self.id)])
 
-    def __str__(self):
-        return '%s, (%s)' % (self.id, self.title)
     
-
-
 class Order(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, default=True)
     book = models.ForeignKey('Book', on_delete=models.SET_NULL, null=True, default=True)

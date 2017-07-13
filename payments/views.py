@@ -35,7 +35,6 @@ def pay(request, price):
         customer=customer.id,
     )
 
-    # print charge
     cart = Cart.objects.filter(user=request.user.id)
     user = User.objects.get(pk=request.user.id)
     amount = (charge.amount/100)

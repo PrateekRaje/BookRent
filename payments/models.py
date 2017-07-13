@@ -7,11 +7,6 @@ from django.contrib.auth.models import User
 from books.models import Book
 from cart.models import Cart
 
-
-
-
-# Create your models here.
-
 class Payment(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, default=True)
     cart = models.ForeignKey('cart.Cart', on_delete=models.SET_NULL, null=True, default=True)
