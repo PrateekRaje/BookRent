@@ -6,6 +6,7 @@ from django.http import HttpResponse
 from datetime import datetime
 
 from django.shortcuts import render
+from django.core.mail import send_mail
 from django.contrib.auth.models import User
 
 from books.models import Book, Order
@@ -53,10 +54,18 @@ def booking(request):
     user = User.objects.get(pk=request.user.id)
     for items in cart:
         book = Book.objects.get(pk=items.book.id)
-        Order.objects.create(book_id= book.id, user= user, issue_date=items.issue_date, return_date=items.return_date, total_price=items.total_price)
+        Order.objects.create(book_id= book.id.title, user= user, issue_date=items.issue_date, return_date=items.return_date, total_price=items.total_price)
     
     count = book.count - 1
     book.count = count
     book.save()
 
+    
+    send_mail(
+        'Subject here',
+        'Here is the message.',
+        settings.DEFAULT_FROM_EMAIL,
+        recipients,
+        fail_silently=False,
+    )
     return HttpResponse("Book is RENTED!!")      

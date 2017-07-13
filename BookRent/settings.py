@@ -135,16 +135,31 @@ USE_TZ = True
 
 SITE_ID = 3
 
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/1.11/howto/static-files/
 
 STATIC_URL = '/static/'
 
+#For email
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+
+EMAIL_USE_TLS = True
+
+EMAIL_HOST = 'smtp.gmail.com'
+
+EMAIL_PORT = 587
+
+EMAIL_HOST_USER = 'prateekraje1114@gmail.com'
+
+EMAIL_HOST_PASSWORD = 'nupurraje'
+
+
+
 # STATIC_ROOT = '/home/pbhonsale/pythonpractice/BookRent/books/static/css '
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 ACCOUNT_SIGNUP_FORM_CLASS = 'books.forms.SignupForm'
 
 STATIC_URL = '/static/'
+
+
 if not DEBUG:    
     STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 else:    #C:\Users\vantu\Desktop\WDJP-final\pyadmin\pyadmin\static    #STATICFILES_DIRS = ('D:/TONY/ECLIPSEworkspace/pyadmin/pyadmin/static',)    

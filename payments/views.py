@@ -24,7 +24,6 @@ def pay(request, price):
     user = User.objects.get(pk=request.user.id)
 
     token = request.POST['stripeToken'] 
-    print "Token is: ",token
     customer = stripe.Customer.create(
         email=user.email,
         source=token,
