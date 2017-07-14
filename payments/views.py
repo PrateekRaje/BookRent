@@ -6,10 +6,13 @@ from django.http import HttpResponse
 from django.shortcuts import render
 from django.contrib.auth.models import User
 from django.core.mail import EmailMessage
+from django.template.loader import render_to_string
+
 
 from books.models import Book, Order
 from cart.models import Cart
 from payments.models import Payment
+from BookRent import settings
 
 
 import stripe
@@ -61,15 +64,18 @@ def pay(request, price):
     return (sendEmailWithAttach(request))
 
 def sendEmailWithAttach(request):
-    html_content = "Order Detail"
-    email = EmailMessage("Hello!!", html_content, "prateekraje1114@gmail.com", ['prateekbhonsale@gmail.com'])
+    subject = "Hello"
+    html_content = render_to_string('email.html')
+    email_from = settings.EMAIL_HOST_USER
+    email_to = ['prateekbhonsale@gmail.com']
+    email = EmailMessage(subject, html_content, email_from, email_to)
     email.content_subtype = "html"
    
-    fd = open('cart/templates/cart/cart_detail.html', 'r')
-    email.attach('cart/templates/cart/cart_detail.html', fd.read(), 'text/plain')
+    # fd = open('cart/templates/cart/cart_detail.html', 'r')
+    # email.attach('cart/templates/cart/cart_detail.html', fd.read(), 'text/plain')
    
     res = email.send()
     
-    return HttpResponse('%s'%res)
-    return HttpResponse("Book is RENTED!!")
+    # return HttpResponse('%s'%res)
+    # return HttpResponse("Book is RENTED!!")
     return HttpResponse("PAYMENT COMPLETED !!!")
