@@ -43,7 +43,7 @@ table th {
   </tr>
 	{% for items in product %}
 	  <tr>
-	    <td>{{ items.book}}</td>
+	    <td>{{ items.book.title}}</td>
 	    <td>{{ items.issue_date }}</td>
 	    <td>{{ items.return_date}}</td>
 	    <td>{{ items.total_price}}</td>

@@ -7,6 +7,7 @@ from datetime import datetime
 
 from django.shortcuts import render
 from django.core.mail import send_mail
+
 from django.contrib.auth.models import User
 
 from books.models import Book, Order
@@ -16,7 +17,6 @@ from cart.models import Cart
 # Create your views here.
 def add_to_cart(request, book_id):
    
-    print "WORKING!!"
     issue_date = request.GET['field1']
     return_date = request.GET['field2']
 
@@ -39,33 +39,48 @@ def add_to_cart(request, book_id):
 
 def view_cart(request, book_id):
 
+    book = Book.objects.get(pk=book_id)
     cart = Cart.objects.filter(user=request.user.id)
     total_amount=0
     for item in cart:
         total_amount= total_amount + item.total_price
         
     total_money = total_amount*100
-    return render(request, "cart/cart_detail.html", {'product':cart, 'total_amount': total_amount, 'total_money': total_money})
+    return render(request, "cart/cart_detail.html", {'product':cart, 'total_amount': total_amount, 'total_money': total_money, 'book':book})
 
 
-def booking(request):
+# def booking(self, request):
 
-    cart = Cart.objects.filter(user=request.user.id)
-    user = User.objects.get(pk=request.user.id)
-    for items in cart:
-        book = Book.objects.get(pk=items.book.id)
-        Order.objects.create(book_id= book.id.title, user= user, issue_date=items.issue_date, return_date=items.return_date, total_price=items.total_price)
+#     cart = Cart.objects.filter(user=request.user.id)
+#     user = User.objects.get(pk=request.user.id)
+#     for items in cart:
+#         book = Book.objects.get(pk=items.book.id)
+#         print book
+#         Order.objects.create(book_id= book, user= user, issue_date=items.issue_date, return_date=items.return_date, total_price=items.total_price)
     
-    count = book.count - 1
-    book.count = count
-    book.save()
+#     count = book.count - 1
+#     book.count = count
+#     book.save()
+#     self.sendEmailWithAttach(request)
 
     
-    send_mail(
-        'Subject here',
-        'Here is the message.',
-        settings.DEFAULT_FROM_EMAIL,
-        recipients,
-        fail_silently=False,
-    )
-    return HttpResponse("Book is RENTED!!")      
+# def sendEmailWithAttach(request):
+#     html_content = "Order Detail"
+#     email = EmailMessage("Hello!!", html_content, "prateekraje1114@gmail.com", ['prateekbhonsale@gmail.com'])
+#     email.content_subtype = "html"
+   
+#     fd = open('cart/templates/cart/cart_detail.html', 'r')
+#     email.attach('cart/templates/cart/cart_detail.html', fd.read(), 'text/plain')
+   
+#     res = email.send()
+    
+#     return HttpResponse('%s'%res)
+#     return HttpResponse("Book is RENTED!!")
+
+
+    # def sendSimpleEmail(request):
+    # res = send_mail("Hello Prateek", "ORDER DETAIL", "prateekraje1114@gmail.com", ['prateekbhonsale@gmail.com'])
+    
+    # return HttpResponse('%s'%res)
+    # return HttpResponse("Book is RENTED!!")
+      

@@ -38,9 +38,6 @@ class Book(models.Model):
     status = models.CharField(max_length=1, choices=LOAN_STATUS, blank=True, default='d', help_text='Book availability')
 
     def __str__(self):
-        return self.summary
-        return self.price
-        return self.count    
         return '%s, (%s)' % (self.id, self.title)
     
     def get_absolute_url(self):
