@@ -1,11 +1,11 @@
 {% extends "books/base.html" %}
 {% block content %} 
 
-  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-  <link rel="stylesheet" href="/resources/demos/style.css">
-  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-  <script>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<link rel="stylesheet" href="/resources/demos/style.css">
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script>
   $( function() {
     var dateFormat = "mm/dd/yy",
       from = $( "#from" )
@@ -39,8 +39,8 @@
     }
   } );
   $("#check").on('click',function(){ 
-checkAvailability();
-})
+  checkAvailability();
+  })
 
    function checkAvailability() {
        var issue_date = document.getElementById("from").value;
@@ -61,8 +61,8 @@ checkAvailability();
    }
 
   $("#cart").on('click',function(){ 
-add_to_cart();
-})
+    add_to_cart();
+  })
 
    function add_to_cart() {
        var issue_date = document.getElementById("from").value;
@@ -85,59 +85,82 @@ add_to_cart();
        }
    });
    }
-
 </script>
-<style>
-.detail {
-   float: left;
-   margin: 27px;
-   padding: 10px;
-   max-width: 10000px;
-   height: 570px;
-   border: 3px solid black;
-}   
-</style>
-  
-    <img src="{{ book.figure.url }}"; style="width:540px;height:360px; float:left; width: 20%; margin-right: 1%; margin-bottom: 0.5em; margin-left: 1%;  margin-top:2%" />
-  <div class="detail">
-    <h1>Title: {{ book.title }}</h1>
-    <p><strong>Author:</strong> <a href="{% url 'author-detail' book.author.pk %}">{{ book.author }}</a></p>
-    <p><strong>Summary:</strong> {{ book.summary }}</p>
-    <p><strong>ISBN:</strong> {{ book.isbn }}</p>
-    <p><strong>Daily Rental Price(in rupees):</strong> {{ book.price}}</p>
-    <p><strong>Genre:</strong> {% for genre in book.genre.all %} {{ genre }}{% if not forloop.last %}, {% endif %}{% endfor %}</p>  
-
-    {% if book.count > 0 %}
-      <p><strong>Book Status:</strong> Available</p>
-    {% else %}
-      <p><strong>Book Status:</strong> Not Available</p>
-    {% endif %}  
-    <p><strong>Imprint:</strong> {{book.imprint}}</p>
-  <!-- </div> -->
-<hr>
-  <!-- <div> -->
-    <h3>To Rent This Book, Please Enter Issue and Return date.</h3>
-  <!-- </div>  -->
-
-
- <forms>
-      {% csrf_token %} 
+<div class="container" style="color:white;">
+  <div class="col-md-12" style="    border: 1px solid;">
+    <center>
+      <h2 style="background-color:grey; color:black;">{{ book.title }}</h2>
+    </center>
+    <div class="col-md-4">
+      <img src="{{ book.figure.url }}" style="max-width: 75%; margin-bottom: 2%;" />
+    </div>
+    <div class="col-md-8">
       
-      <label for="from">Issue Date</label>
-      <input type="text" id="from" name="issue_date"> <br><br>
-      <label for="to">Return Date</label>
-      <input type="text" id="to" name="return_date"><br><br>
-      
-      <p><strong>Quantity:</strong><input type="number" id="quant" name= quantity id="myNumber" value="1">
-      <div id="ajaxcall">
-        <button type="button" id="check" onclick="checkAvailability()">Check book Availability</button>&nbsp
-      </div>&nbsp
-  
-      <div id="ajaxcall">
-        <button type="button" id="cart" onclick="add_to_cart()">Add To Cart</button>
+      <div class="col-md-12">
+        <div class="col-md-6">
+          <p><strong>Author:</strong> <a href="{% url 'author-detail' book.author.pk %}">{{ book.author }}</a></p>
+        </div>
+        <div class="col-md-6">
+          <p><strong>Summary:</strong> {{ book.summary }}</p>
+        </div>
       </div>
- </form>
-</div>      
+      <div class="col-md-12">
+        <div class="col-md-6">
+          <p><strong>ISBN:</strong> {{ book.isbn }}</p>
+        </div>
+        <div class="col-md-6">
+          <p><strong>Daily Rental Price(in rupees):</strong> {{ book.price}}</p>
+        </div>
+      </div>
+      <div class="col-md-12">
+        <div class="col-md-6">
+          <p><strong>Genre:</strong> {% for genre in book.genre.all %} {{ genre }}{% if not forloop.last %}, {% endif %}{% endfor %}</p>  
+        </div>
+        <div class="col-md-6">
+          {% if book.count > 0 %}
+            <p><strong>Book Status:</strong> Available</p>
+          {% else %}
+            <p><strong>Book Status:</strong> Not Available</p>
+          {% endif %}
+        </div>
+      </div>
+
+      <div class="col-md-12">
+        <div class="col-md-6">
+          <p><strong>Imprint:</strong> {{book.imprint}}</p>
+        </div>
+        <div class="col-md-6">
+        </div>
+      </div>
+      <div class="row col-md-12 ">
+      <center>
+        <h4>To Rent This Book, Please Enter Issue and Return date.</h4>
+          <form>
+            {% csrf_token %} 
+            <label for="from">Issue Date</label>
+            <div class="form-input" style ="color: black;">
+              <input type="text" id="from" name="issue_date">
+            </div>
+            <label for="to">Return Date</label>
+            <div class="form-input" style ="color: black;">
+              <input type="text" id="to" name="return_date">
+            </div>
+
+            <strong>Quantity:</strong>
+            <div class="form-input"  style ="color: black;">
+              <input type="number" id="quant" name= quantity id="myNumber" value="1">
+            </div>
+            
+            <div id="ajaxcall" class="form-input" style="margin-top: 6%;">
+              <button type="button" class="btn btn-primary" id="check" onclick="checkAvailability()">Check book Availability</button>&nbsp
+              <button type="button" class="btn btn-primary" id="cart" onclick="add_to_cart()" style="    min-width: 25%;">Add To Cart</button>
+            </div>
+          </form>
+        </center>
+      </div>
+    </div>
+  </div>   
+</div>
 {% endblock %}
        
 

@@ -1,7 +1,7 @@
 {% extends "books/base.html" %}
 
 {% block content %}
-  <div>
+  <div style="color: black">
   <h1>YOUR BOOKS</h1>
   <hr><hr>	
 
@@ -54,8 +54,9 @@ table th {
    {% endfor %}
   
 </table>
-
-<h2> Total Price : {{total_amount}} </h2>
+<div style="color: black">
+  <h2> Total Price : {{total_amount}} </h2>
+</div>
 <hr>
 
 <form action="/payments/pay/{{total_money}}" method="POST">

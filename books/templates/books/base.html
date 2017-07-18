@@ -1,32 +1,30 @@
 {% load staticfiles %}
 <!DOCTYPE html>
-
 <html lang="en">
-
-<head>
+  <head>
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}" />
-    <style>
-    .abc > a {color:black; font-size:45px; text-decoration:none; background-color:grey; text-transform:uppercase }
-    </style>
-</head>
-
-<body>
-  
-  <div class="abc"> 
-
-        <a href="/"> HOME  </a> &nbsp&nbsp&nbsp&nbsp
-        <a href="/books/"> BOOKS  </a> &nbsp&nbsp&nbsp&nbsp
-        <a href="/authors/"> AUTHORS  </a> &nbsp&nbsp&nbsp&nbsp
-        <a href="/cart/cartview/"> CART  </a> &nbsp&nbsp&nbsp&nbsp
-        
-  </div>
-  <hr>
-  <div>
-    {% block content %}
-
-    {% endblock %}  
-  </div>
-
-</body>
-
+  </head>
+  <body>
+    <div class="container" style="margin-top: 3%;">
+      <div class="col-md-12">
+        <div class="col-md-3">
+          <a class="btn btn-primary" href="/"> HOME  </a> 
+        </div>
+        <div class="col-md-3">
+          <a class="btn btn-primary" href="/books/"> BOOKS  </a>
+        </div>
+        <div class="col-md-3">
+          <a class="btn btn-primary" href="/authors/"> AUTHORS  </a>
+        </div>
+        <div class="col-md-3">
+          <a class="btn btn-primary" href="/cart/cartview/"> CART  </a>
+        </div>
+      </div>      
+    </div>
+    <div class="row" style="margin-top: 3%;">
+      {% block content %}
+      {% endblock %}
+    </div>
+  </body>
 </html>
