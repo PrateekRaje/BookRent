@@ -32,7 +32,7 @@ def index(request):
 def book_list(request):
     book = Book.objects.all()
     return render(request,'books/book_list.html',{'book_list':book})
-        
+
 def book_detail(request, pk):
     book = Book.objects.get(pk=pk)
     return render(request, 'books/book_detail.html',{'book':book})

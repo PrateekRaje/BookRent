@@ -16,6 +16,8 @@ def pay(request, price):
     
     # import pdb
     # pdb.set_trace()
+    stripe.api_key = "sk_test_d4iXJ56imIxwGMKEzQPKz2bY"
+
     user = User.objects.get(pk=request.user.id)
 
     token = request.POST['stripeToken'] 

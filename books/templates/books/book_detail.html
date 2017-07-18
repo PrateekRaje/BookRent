@@ -85,38 +85,42 @@ add_to_cart();
        }
    });
    }
-</script>
 
+</script>
+<style>
+.detail {
+   float: left;
+   margin: 27px;
+   padding: 10px;
+   max-width: 10000px;
+   height: 570px;
+   border: 3px solid black;
+}   
+</style>
   
-  <div>
+    <img src="{{ book.figure.url }}"; style="width:540px;height:360px; float:left; width: 20%; margin-right: 1%; margin-bottom: 0.5em; margin-left: 1%;  margin-top:2%" />
+  <div class="detail">
     <h1>Title: {{ book.title }}</h1>
     <p><strong>Author:</strong> <a href="{% url 'author-detail' book.author.pk %}">{{ book.author }}</a></p>
     <p><strong>Summary:</strong> {{ book.summary }}</p>
     <p><strong>ISBN:</strong> {{ book.isbn }}</p>
     <p><strong>Daily Rental Price(in rupees):</strong> {{ book.price}}</p>
     <p><strong>Genre:</strong> {% for genre in book.genre.all %} {{ genre }}{% if not forloop.last %}, {% endif %}{% endfor %}</p>  
-  </div>
 
-<hr>
-
-  <div style="margin-left:20px;margin-top:20px">
     {% if book.count > 0 %}
       <p><strong>Book Status:</strong> Available</p>
     {% else %}
       <p><strong>Book Status:</strong> Not Available</p>
     {% endif %}  
     <p><strong>Imprint:</strong> {{book.imprint}}</p>
-    
-  </div>
-
+  <!-- </div> -->
 <hr>
-
-  <div>
+  <!-- <div> -->
     <h3>To Rent This Book, Please Enter Issue and Return date.</h3>
-  </div> 
+  <!-- </div>  -->
+
 
  <forms>
-
       {% csrf_token %} 
       
       <label for="from">Issue Date</label>
@@ -132,8 +136,17 @@ add_to_cart();
       <div id="ajaxcall">
         <button type="button" id="cart" onclick="add_to_cart()">Add To Cart</button>
       </div>
-      
  </form>
-       
+</div>      
 {% endblock %}
+       
+
+  
+    
+
+  
+
+
+
+
 

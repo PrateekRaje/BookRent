@@ -4,6 +4,7 @@
 <style> 
 input[type=text] {
     width: 450px;
+    margin-top: 3%;
     box-sizing: border-box;
     border: 3px solid grey;
     border-radius: 18px;
@@ -22,7 +23,7 @@ input[type=text]:focus {
 }
 </style>
 
-<form id="searchform" action="/bookrent/books/" method="get" accept-charset="utf-8">
+<form id="searchform" action="/search/{{book.id}}" method="get" accept-charset="utf-8">
   <input class="searchfield" id="searchbox" name="q" type="text" placeholder="Search By Book Title...">
 </form>
 
@@ -36,10 +37,10 @@ input[type=text]:focus {
     <ul>
      {% for book in book_list %}
         {% if book.count > 0 %}
-            <li>  
-              <img src={{ book_list.figure.url }} />
-              <a href="{{ book.get_absolute_url }}">{{ book.title }}</a> ({{book.author.first_name}} {{ book.author.last_name}})
-            </li>
+            <ul>  
+              <a href="{{ book.get_absolute_url }}"><img src="{{ book.figure.url }}"; style="width:540px;height:360px; float:left; width: 20%; margin-right: 1%; margin-bottom: 0.5em; margin-left: 1% " /></a>
+              <!-- <a href="{{ book.get_absolute_url }}">{{ book.title }}</a> ({{book.author.first_name}} {{ book.author.last_name}}) -->
+            </ul>
         {% endif %}
      {% endfor %}
     </ul>

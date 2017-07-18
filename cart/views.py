@@ -60,10 +60,15 @@ def add_to_cart(request, book_id):
     book = Book.objects.get(pk=book_id)
     user= User.objects.get(pk=request.user.id)
 
-    days = return_date - issue_date
-    total_days= days.days
-    total_price = (total_days * int(book.price))* int(quantity)
-   
+    if (issue_date == return_date):
+      total_days = 1
+      total_price = (total_days * int(book.price))* int(quantity)
+    
+    else:
+      days = return_date - issue_date
+      total_days= days.days
+      total_price = (total_days * int(book.price))* int(quantity)
+     
     Cart.objects.create(user=user, book=book, issue_date=issue_date, return_date=return_date, total_price=total_price, quantity=quantity)
     
     reply =  "CONTINUE TO RENT"
@@ -83,3 +88,4 @@ def delete_from_cart(request, items_id):
     Cart.objects.get(id =items_id).delete()    
     return HttpResponseRedirect('/cart/cartview/')
  
+     

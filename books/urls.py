@@ -10,4 +10,5 @@ urlpatterns = [
     url(r'^authors/$', views.author_list, name='authors'),
     url(r'^author/(?P<pk>\d+)$', views.author_detail, name='author-detail'),
     url(r'^check/(?P<book_id>\d+)', views.checkAvailability, name='check-availability'),
+    # url(r'^search/$',views.search, name='search'),
 ]    

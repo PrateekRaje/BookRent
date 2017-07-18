@@ -166,9 +166,9 @@ else:
 
 
 
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-# MEDIA_ROOT =  'BookRent/books/media'
-MEDIA_URL = '/media/'
+# MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_ROOT =  '/home/pbhonsale/pythonpractice/BookRent'
+MEDIA_URL = '/media/media/'
 
 APPEND_SLASH=False
 
