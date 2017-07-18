@@ -48,7 +48,7 @@ checkAvailability();
        console.log("issue_date",issue_date)
        console.log("in func")
        $.ajax({
-       url: 'http://localhost:8000/bookrent/check/{{book.id}}?field1='+issue_date+'&field2='+return_date , 
+       url: '/check/{{book.id}}?field1='+issue_date+'&field2='+return_date , 
        type: 'GET',
        contentType: 'application/json; charset=utf-8',
        success: function (response) {
@@ -67,15 +67,19 @@ add_to_cart();
    function add_to_cart() {
        var issue_date = document.getElementById("from").value;
        var return_date = document.getElementById("to").value;
+       var quantity = document.getElementById("quant").value;
        console.log("issue_date",issue_date)
        console.log("in func")
        $.ajax({
-       url: 'http://localhost:8000/cart/rent/{{book.id}}/{?field1='+issue_date+'&field2='+return_date, 
+       url: '/cart/rent/{{book.id}}/{?field1='+issue_date+'&field2='+return_date+'&quantity='+quantity , 
        type: 'GET',
        contentType: 'application/json; charset=utf-8',
        success: function (response) {
-           window.open("/cart/cartview/{{book.id}}");
-       },
+           if (response == 'CONTINUE TO RENT')
+               window.open("/cart/cartview/{{book.id}}");
+           else if (response == 'BOOK NOT AVAILABLE ,BOOK IS ISSUEED FOR THE CHOSEN DATES')  
+               alert(response)
+          },
        error: function () {
            alert("error");
        }
@@ -102,6 +106,7 @@ add_to_cart();
       <p><strong>Book Status:</strong> Not Available</p>
     {% endif %}  
     <p><strong>Imprint:</strong> {{book.imprint}}</p>
+    
   </div>
 
 <hr>
@@ -119,12 +124,15 @@ add_to_cart();
       <label for="to">Return Date</label>
       <input type="text" id="to" name="return_date"><br><br>
       
+      <p><strong>Quantity:</strong><input type="number" id="quant" name= quantity id="myNumber" value="1">
       <div id="ajaxcall">
         <button type="button" id="check" onclick="checkAvailability()">Check book Availability</button>&nbsp
       </div>&nbsp
+  
       <div id="ajaxcall">
         <button type="button" id="cart" onclick="add_to_cart()">Add To Cart</button>
       </div>
+      
  </form>
        
 {% endblock %}

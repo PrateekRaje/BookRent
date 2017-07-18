@@ -5,16 +5,19 @@
 
 <head>
     <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}" />
+    <style>
+    .abc > a {color:black; font-size: 30; text-decoration:none; background-color:grey; text-transform:uppercase }
+    </style>
 </head>
 
 <body>
   
-  <div>
-      <ul>
-          <li><a href="{% url 'index' %}">Home</a></li>
-          <li><a href="{% url 'books' %}">Books</a></li>
-          <li><a href="{% url 'authors' %}">Authors</a></li>
-      </ul>
+  <div class="abc"> 
+
+        <a href="/"> HOME  </a> &nbsp&nbsp&nbsp&nbsp
+        <a href="/books/"> BOOKS  </a> &nbsp&nbsp&nbsp&nbsp
+        <a href="/authors/"> AUTHORS  </a> &nbsp&nbsp&nbsp&nbsp
+        
   </div>
   <hr>
   <div>

@@ -40,21 +40,25 @@ table th {
     <th>Pick Up Date</th>
     <th>Return Date</th>
     <th>Price</th>
+    <th>Quantity</th>
   </tr>
 	{% for items in product %}
 	  <tr>
-	    <td>{{ items.book.title}}</td>
+	    <td>{{ items.book.title }}</td>
 	    <td>{{ items.issue_date }}</td>
-	    <td>{{ items.return_date}}</td>
-	    <td>{{ items.total_price}}</td>
-	  </tr>
-    {% endfor %}
+	    <td>{{ items.return_date }}</td>
+	    <td>{{ items.total_price }}</td>
+      <td>{{ items.quantity }}</td>
+      <td><a href="/cart/deletecart/{{items.id}}">Remove from cart</a></td>	  
+    </tr>
+   {% endfor %}
   
 </table>
 
 <h2> Total Price : {{total_amount}} </h2>
 <hr>
-<form action="http://localhost:8000/payments/pay/{{total_money}}" method="POST">
+
+<form action="/payments/pay/{{total_money}}" method="POST">
      {% csrf_token %}
     <script src="https://checkout.stripe.com/checkout.js" class="stripe-button btn-danger"
          data-key="pk_test_lzl3tFIRBvv6FWTOKu56QULA"
@@ -66,5 +70,4 @@ table th {
          data-locale="auto">
     </script>
 </form>
-
 {% endblock %} 

@@ -1,10 +1,11 @@
-{% extends "account/base.html" %}
+{% extends "base.html" %}
 
 {% load i18n %}
 
+{% load static %}
+
 {% block content %}
 
-{% load static %}
 <html>
 
 <head>
@@ -29,14 +30,15 @@
     <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}"/>
     {% endif %}
     
-      <div class="abc"> 
+     <div class="abc"> 
 
-        <a href="/bookrent/"> HOME  </a> &nbsp&nbsp&nbsp&nbsp
-        <a href="/bookrent/books/"> BOOKS  </a> &nbsp&nbsp&nbsp&nbsp
-        <a href="/bookrent/authors/"> AUTHORS  </a> &nbsp&nbsp&nbsp&nbsp
-        <a href="/accounts/profile/"> PROFILE  </a> &nbsp&nbsp&nbsp&nbsp
-        <a href="#"> ABOUT US  </a> &nbsp&nbsp&nbsp&nbsp
+        <a href="/"> HOME  </a> &nbsp&nbsp&nbsp&nbsp
+        <a href="/books/"> BOOKS  </a> &nbsp&nbsp&nbsp&nbsp
+        <a href="/authors/"> AUTHORS  </a> &nbsp&nbsp&nbsp&nbsp
+        <!-- <a href="/accounts/profile/"> PROFILE  </a> &nbsp&nbsp&nbsp&nbsp -->
+        <!-- <a href="#"> ABOUT US  </a> &nbsp&nbsp&nbsp&nbsp -->
         <button type="submit"  style= "color:black; background-color:grey; ">{% trans 'Sign Out' %}</button>
+     
      </div>
     </form> 
 

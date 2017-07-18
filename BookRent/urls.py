@@ -25,14 +25,14 @@ from samplecel import views
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^', include('home.urls')),
     url(r'^accounts/', include('allauth.urls')),
     url(r'^accounts/', include('home.urls')),
-    url(r'^bookrent/', include('books.urls')),
+    url(r'^', include('books.urls')),
     url(r'^cart/', include('cart.urls')),
+    url(r'^home/', include('home.urls')),
     url(r'^payments/', include('payments.urls')),
     url(r'celerysample$', views.test),
 
 ]    
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATICFILES_DIRS, show_indexes=True)
-
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -22,7 +22,7 @@ input[type=text]:focus {
 }
 </style>
 
-<form id="searchform" action="http://localhost:8000/bookrent/books/" method="get" accept-charset="utf-8">
+<form id="searchform" action="/bookrent/books/" method="get" accept-charset="utf-8">
   <input class="searchfield" id="searchbox" name="q" type="text" placeholder="Search By Book Title...">
 </form>
 
@@ -34,15 +34,21 @@ input[type=text]:focus {
 <div>
     {% if book_list %}
     <ul>
-      {% for book in book_list %}
-      <li>
-        <a href="{{ book.get_absolute_url }}">{{ book.title }}</a> ({{book.author.first_name}} {{ book.author.last_name}})
-      </li>
-      {% endfor %}
+     {% for book in book_list %}
+        {% if book.count > 0 %}
+            <li>  
+              <img src={{ book_list.figure.url }} />
+              <a href="{{ book.get_absolute_url }}">{{ book.title }}</a> ({{book.author.first_name}} {{ book.author.last_name}})
+            </li>
+        {% endif %}
+     {% endfor %}
     </ul>
     {% else %}
       <p>There are no books in the Gallery.</p>
     {% endif %}       
 </div>
-
 {% endblock %}
+    
+    
+              
+            

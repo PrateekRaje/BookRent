@@ -75,6 +75,7 @@ TEMPLATES = [
                 'django.template.context_processors.debug',
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
+                'django.template.context_processors.media',
                 'django.contrib.messages.context_processors.messages',
             ],
         },
@@ -149,12 +150,10 @@ EMAIL_PORT = 587
 
 EMAIL_HOST_USER = 'prateekraje1114@gmail.com'
 
-EMAIL_HOST_PASSWORD = 'nupurraje'
+EMAIL_HOST_PASSWORD = '11nupurraje14'
 
 
 
-# STATIC_ROOT = '/home/pbhonsale/pythonpractice/BookRent/books/static/css '
-# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 ACCOUNT_SIGNUP_FORM_CLASS = 'books.forms.SignupForm'
 
 STATIC_URL = '/static/'
@@ -162,9 +161,14 @@ STATIC_URL = '/static/'
 
 if not DEBUG:    
     STATIC_ROOT = os.path.join(BASE_DIR, 'static')
-else:    #C:\Users\vantu\Desktop\WDJP-final\pyadmin\pyadmin\static    #STATICFILES_DIRS = ('D:/TONY/ECLIPSEworkspace/pyadmin/pyadmin/static',)    
+else:     
     STATICFILES_DIRS = [        os.path.join(BASE_DIR, "static"),    ]
 
+
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+# MEDIA_ROOT =  'BookRent/books/media'
+MEDIA_URL = '/media/'
 
 APPEND_SLASH=False
 

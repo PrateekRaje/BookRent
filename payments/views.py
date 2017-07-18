@@ -1,26 +1,17 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 from django.http import HttpResponse
-
-
 from django.shortcuts import render
 from django.contrib.auth.models import User
 from django.core.mail import EmailMessage
 from django.template.loader import render_to_string
-
+import stripe
 
 from books.models import Book, Order
 from cart.models import Cart
 from payments.models import Payment
 from BookRent import settings
 
-
-import stripe
-
-stripe.api_key = "sk_test_d4iXJ56imIxwGMKEzQPKz2bY"
-
-
-# Create your views here.
 def pay(request, price):
     
     # import pdb
@@ -49,6 +40,7 @@ def pay(request, price):
             user= user,
             issue_date=items.issue_date, 
             return_date=items.return_date,
+            quantity = items.quantity,
             amount= amount,
             credit_card= charge.source.last4,
             charge_id=charge.id, 
@@ -70,12 +62,14 @@ def sendEmailWithAttach(request):
     email_to = ['prateekbhonsale@gmail.com']
     email = EmailMessage(subject, html_content, email_from, email_to)
     email.content_subtype = "html"
-   
-    # fd = open('cart/templates/cart/cart_detail.html', 'r')
-    # email.attach('cart/templates/cart/cart_detail.html', fd.read(), 'text/plain')
-   
     res = email.send()
     
-    # return HttpResponse('%s'%res)
-    # return HttpResponse("Book is RENTED!!")
     return HttpResponse("PAYMENT COMPLETED !!!")
+
+
+
+
+
+
+
+# Create your views here.

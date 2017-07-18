@@ -16,11 +16,16 @@
 
 <div class="abc">  
 
-    <a href="/bookrent/books/"> BOOKS  </a> &nbsp&nbsp&nbsp&nbsp
-    <a href="/bookrent/authors/"> AUTHORS  </a> &nbsp&nbsp&nbsp&nbsp
-    <a href="/accounts/profile/"> PROFILE  </a> &nbsp&nbsp&nbsp&nbsp
+    <a href="/books/"> BOOKS  </a> &nbsp&nbsp&nbsp&nbsp
+    <a href="authors/"> AUTHORS  </a> &nbsp&nbsp&nbsp&nbsp
+    {% if request.user.is_authenticated %}
+      <a href="/accounts/profile/"> PROFILE  </a> &nbsp&nbsp&nbsp&nbsp
+    {% elif not request.user.is_authenticated %}
+    <a href="/accounts/signup/"> SIGNUP  </a> &nbsp&nbsp&nbsp&nbsp
+    <a href="/accounts/login/"> LOGIN  </a> &nbsp&nbsp&nbsp&nbsp
+    {% endif %}
     <a href="#"> ABOUT US  </a> &nbsp&nbsp&nbsp&nbsp
-    <!-- <a href="/cart/cartview/"> CART  </a> &nbsp&nbsp&nbsp&nbsp -->
+    <a href="/cart/cartview/"> CART  </a> &nbsp&nbsp&nbsp&nbsp
     
 </div>
 <hr>
@@ -30,8 +35,6 @@
    <p>The gallery has the following record counts:</p>
    <ul>
      <li><strong>Number Of Books:</strong> {{ num_books }}</li>
-     <!-- <li><strong>Copies:</strong> {{ num_instances }}</li> -->
-     <!-- <li><strong>Copies available:</strong> {{ num_instances_available }}</li> -->
      <li><strong>Authors:</strong> {{ num_authors }}</li>
    </ul>
    <p>You have visited this page {{ num_visits }}{% if num_visits == 1 %} time{% else %} times{% endif %}.</p>
