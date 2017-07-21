@@ -42,4 +42,3 @@ six==1.10.0
 stripe==1.62.0
 urllib3==1.21.1
 Werkzeug==0.12.2
-whitenoise==3.3.0
